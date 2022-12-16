@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Object Model Demo</title>
+</head>
+<body>
+    <div>
+        <button onclick="openWin()">Open window</button>
+        <button onclick="closeWin()">Close window</button>
+        <button onclick="alertWin()">Alert</button>
+        <button onclick="promptWin()">Prompt</button>
+        <button onclick="confirmWin()">Confirm</button>
+    </div>
+    <script>
+        var windowObj; var username;
+        function openWin(){
+            windowObj=window.open("https://portal.accenture.com");
+        }
+        function closeWin(){
+            windowObj=window.close();
+        }
+        function alertWin(){
+            username="Sweety";
+            window.alert("Good afternoon,"+username);
+            alert("Thank you")
+        }
+        function promptWin(){
+            var input=prompt("Enter your OS start date");
+            alert("The batch start date is: "+input)
+        }
+        function confirmWin(){
+            var result=confirm("are you sure to save the credentials");
+            if (result==true)
+                alert("Saved Successfully.....");
+            else
+                alert("Save failed......");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+Client Culture
+
+Why is knowing the Client Culture is so important?
+client expects like we care about their success.
+The client expects us to:
+• Know our responsibilities in our 
+project role.
+• Blend in at the client 
+environment.
+• Adapt to the client’s style.
+• Deliver value by completing 
+quality work.
+---->
+
+Know your Responsibilities
+-----> Three Phase---->Design Phase----->Build Phase---->Test Phaase
+1.Design Phase-Create a detailed 
+design
+• Create test scenarios 
+and conditions
+
+2.Build Phase-Develop application 
+code
+• Create test scripts 
+and data
+
+3.Test Phase-Test execution
+• Defect logging and 
+management: 
+Defect reporting
+
+
+Managing Social Media
+1.Keep social media and client work seprate
+2.Less time spend on social media
+3.Setup email privacy settings
+
+
+Blending IN
+Client expects us to blend in their culture but we have to retain our accenture proffeniosalim.
+Learn client culture quickly
+not to use accenture jargon in front of clients.
+
+
+Quality work-
+All client requirements are met.
+All coding,reviewing,testing standards are met.
+Proper documents
+Defects are minimized
+
+
+
+Building TRust with clients
+Trusted Relationships are important.
+BEcause Clients buy from people not from companies!
+
+Chracterstics of trusted relationships-
+Not exaggerating your credentials
+Avoiding ambiguous statements
+Not hiding difficult situations
+Taking responsibility for your actions and words
+Giving credit to those who deserve it
+
+Trust=Credible(that you can believe) + Reliable(works or qualiyty expects vs reality)+ Intimacy(close friendship)
+      ___________________________________________________________________________________________________________
+							Self-orientation  
+
+Tips to build trust
+good understanding of roles and responsinlities of team
+Be eager to help
+Practise building your skiils coz it takes time to become expert
+Consider the geographic culture of your client.
+
+Module-6
+Requirement---->A condition or a capability, which a system must fulfil
+A capability that must be met or possessed 
+by a system to satisfy a contract,
+
+Chracterstics of good reuirement
+Concise (giving a lot of information clearly and in a few words)
+Verifiable (accurate)
+Reviewed(confirm before submitting)
+Necessity(need)
+Consistent(samE opinions) 
+Compliant with template
+Correct Terminology(language used to describe something)
+Traceable(ablity to trace works)
+Clear 
+Goal oriented
+Complete
+Modifiable
+Measurable
+Grammatically correct
+Appropriately detailed 
+Understandable
+
+Importance of good requirement-
+It is important to communicate to the client 
+that getting a requirement right will:
+• Meet project deadlines
+• Maintain the project scope
+• Promote communication
+• Satisfy customer needs
+• Lower project costs
+
+
+Good reuirement vs Bad Requirement (from ppt)
+
+
+

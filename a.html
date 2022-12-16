@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+    </div>
+  <body>
+    <div class="container-fluid" style="background-color:rgb(171, 192, 214)" >
+      <h1>
+      <a class="nav-link active" aria-current="page" style="color: rgb(27, 43, 57);"  href="#">STUDENT_PERFORMANCE</a>
+    </h1>
+    <h4>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid my-3" >
+      </div>
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#">Mylist</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color:rgb(215, 228, 217)"> -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="color: black;"  href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;"  href="#">Link</a>
+              <!-- <a href="http://127.0.0.1:5000/gen"></a> -->
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="color: black;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" style="color: black;" >Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        <!-- </div> -->
+      </div>
+    </nav>
+      <img src="https://th.bing.com/th/id/R.132e7f2e9c26563de69383f0712c4ab8?rik=7BXeyO5pbRA3DA&riu=http%3a%2f%2fstandards-basedclassroom.org%2fwp-content%2fuploads%2f2019%2f07%2fgraph-1-1024x661.png&ehk=NiXehrVxAkXVuR4SsaImcIdupxSDaOgV4ISOqPByNeE%3d&risl=&pid=ImgRaw&r=0" height="600" width="1500">
+    <div>
+    <h5>
+      <a href="{{ url_for('gender') }}" style="color:rgb(75, 6, 68)"> Link To gender</a><br>
+      <a href="{{ url_for('maxre') }}" style="color:green" >Link To Max_Reading</a><br>
+      <a href="{{ url_for('maxwr') }}" style="color:yellow"  >Link To Max_Writing</a><br>
+      <a href="{{ url_for('maxma') }}" style="color:red" >Link To Max_Math</a><br>
+      <a href="{{ url_for('table') }}" style="color:black"  >Link To Table</Table></a><br>
+    </h5>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>

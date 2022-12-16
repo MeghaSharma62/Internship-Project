@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <head>
+        <body>
+            <h1 style="background-color:pink ;">Welcome to Registration Form </h1>
+            <div>
+                Username:<input type="text" id="username" name="username"><br><br>
+                Password:<input type="password" id="password" name="password"><br><br>
+                Confirm_Password:<input type="password" id="confirm password" name="confirm password"><br><br>
+                Age:<input type="number" id="age" name="age"><br><br>
+                DOB:<input type="tel" id="dob" name="dob"><br><br>
+                Stream:<input type="text" id="stream" name="stream"><br><br>
+                <button style="color: blue;">Login</button>
+                <button style="color:blue ;">Reset</button>
+            </div>
+            <script type="text/javascript">
+                function validpassword(Password,Confirm_Password){
+                    if (Password==Confirm_Password){
+                        return("Correct Password")
+                    }
+                    else{
+                        console.log("Password not matched")
+                    }
+                }
+                function agecheck(Age){
+                    if (Age>18 & Age<24){
+                        return ("You are able to Login");
+                    }
+                    else{
+                        console.log("Catch the exception using throw:"+Age);
+                        throw "AgeOutOfRange";
+                        throw(new Error("AgeOutOfRange"));
+
+                    }
+                }
+            </script>
+        </body>
+    </head>
+</html>
+

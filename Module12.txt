@@ -1,0 +1,43 @@
+What is quality?----->Quality reflects how well software complies with or conforms to a given design, based on functional (business rule, administrative function etc.)
+
+
+
+1)Opportunity  Phase Focus:----->Understand what the client wants to do.
+                  :----->Describe a solution  to meet their needs based on our previous project or engagement experiences.
+                  :----->Determine what conditions  exist that could impact the effort if they are not addressed.
+
+
+
+2)Delivery Phase Focus:----->Identify areas that strengthen the delivery team’s ability to embed quality practices and deliver a quality outcome.
+                :----->Combine ongoing root cause analysis and continual  improvement to fix issues when problems occur.
+                :----->Continuous  reviews and testing are done to identify defects at an early stage and implement the required changes.
+
+
+
+
+
+•We must start with a focus on quality at the very beginning, when we are working on new deals with our current and future clients.
+This is called the opportunity phase focus.
+
+
+
+•Once we start the project, it is important that we focus on the quality in order to deliver what we had committed in the opportunity phase.
+This is called the delivery phase focus.
+
+
+
+
+McCall’s Eleven Quality Factors:-
+
+
+
+1)Product Operation:-Usability(easy to use),Integrity(safe or not),Efficiency( responce fast or slow),Correctness( accuracy)
+
+
+
+2)Product Revision:-Reliability(performance of the software or failer),Maintainability(maintainance according to feedback),Testability( validation the software)
+                ,Flexibility(ability to change (adaption))
+
+
+
+3)Product Transition:-Reusability(easy to reuse the content),Portability(transfer the program to different environments),Inter-operability(interface with other systems)

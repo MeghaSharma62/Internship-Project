@@ -1,0 +1,1419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Gede Manik (ULTA SALON) --><xs:schema xmlns:dtv="http://www.datavantagecorp.com/xstore/" xmlns:ixretail="http://www.nrf-arts.org/IXRetail/namespace/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.nrf-arts.org/IXRetail/namespace/">
+	<xs:import namespace="http://www.datavantagecorp.com/xstore/" schemaLocation="Poslog_dtv.xsd"/>
+	<xs:element name="POSLog">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Transaction"/>
+			</xs:sequence>
+			<xs:attribute name="schemaLocation" use="required"/>
+			<xs:attribute ref="dtv:schemaLocation" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Transaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dtv:OrganizationID"/>
+				<xs:element ref="ixretail:RetailStoreID"/>
+				<xs:element ref="ixretail:WorkstationID"/>
+				<xs:element ref="ixretail:TillID"/>
+				<xs:element ref="ixretail:SequenceNumber"/>
+				<xs:element ref="ixretail:BusinessDayDate"/>
+				<xs:element ref="ixretail:BeginDateTime"/>
+				<xs:element minOccurs="0" ref="ixretail:EndDateTime"/>
+				<xs:element minOccurs="0" ref="ixretail:OperatorID"/>
+				<xs:element ref="ixretail:CurrencyCode"/>
+				<xs:choice>
+					<xs:element ref="dtv:ForeignCurrencyExchangeRate"/>
+					<xs:element ref="dtv:TenderExchange"/>
+					<xs:element ref="dtv:TimeClockTransaction"/>
+					<xs:element ref="dtv:TrainingModeTransaction"/>
+					<xs:element ref="ixretail:ControlTransaction"/>
+					<xs:element ref="ixretail:POSLogControlTransaction"/>
+					<xs:element ref="ixretail:TenderControlTransaction"/>
+					<xs:element ref="ixretail:TillControlTransaction"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:InventoryTransaction"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:STORE_TOTAL"/>
+				</xs:choice>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:PosTransactionProperties"/>
+				<xs:element minOccurs="0" ref="ixretail:RetailTransaction"/>
+			</xs:sequence>
+			<xs:attribute name="CancelFlag" type="xs:boolean" use="required"/>
+			<xs:attribute name="OfflineFlag" type="xs:boolean" use="required"/>
+			<xs:attribute name="TrainingModeFlag" type="xs:boolean" use="required"/>
+			<xs:attribute ref="dtv:AppVersion" use="required"/>
+			<xs:attribute ref="dtv:InventoryDocumentSubType"/>
+			<xs:attribute ref="dtv:InventoryDocumentType"/>
+			<xs:attribute ref="dtv:TransactionType" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TillID" type="xs:integer"/>
+	<xs:element name="ControlTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:ReasonCode"/>
+				<xs:choice>
+					<xs:element ref="dtv:SystemCycleType"/>
+					<xs:element ref="ixretail:NoSale"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NoSale" type="xs:NMTOKEN"/>
+	<xs:element name="POSLogControlTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:OperatorID"/>
+				<xs:choice>
+					<xs:element ref="dtv:AssignTill"/>
+					<xs:element ref="dtv:AttachTill"/>
+					<xs:element ref="dtv:RemoveTill"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TenderControlTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:OperatorID"/>
+				<xs:element minOccurs="0" ref="dtv:OperatorName"/>
+				<xs:element minOccurs="0" name="UltStoreOperatingFund" type="xs:decimal"/>
+				<xs:element minOccurs="0" name="UltTotalBankDeposit" type="xs:decimal"/>
+				<xs:element minOccurs="0" name="UltTotalCheckAmount" type="xs:decimal"/>
+				<xs:choice>
+					<xs:element ref="dtv:BankDeposit"/>
+					<xs:element ref="dtv:CashTransfer"/>
+					<xs:element ref="dtv:LocalCurrencyDeposit"/>
+					<xs:element ref="dtv:MidDayTillDeposit"/>
+					<xs:element ref="dtv:StoreBankAudit"/>
+					<xs:element ref="dtv:TillAudit"/>
+					<xs:element ref="dtv:TillClosingCount"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:AssociateAdvance"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="dtv:BeginTillCount"/>
+				<xs:element minOccurs="0" ref="dtv:LocalCurrencyPickup"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:PaidIn"/>
+					<xs:element ref="ixretail:PaidOut"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:GLAccountNumber"/>
+				<xs:element minOccurs="0" ref="dtv:Comment"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaidIn">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:element ref="ixretail:Reason"/>
+				<xs:element ref="dtv:ReasonDescription"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaidOut">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:element ref="ixretail:Reason"/>
+				<xs:element ref="dtv:ReasonDescription"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GLAccountNumber" type="xs:NCName"/>
+	<xs:element name="TillControlTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Type"/>
+				<xs:element ref="ixretail:EmployeeID"/>
+				<xs:element ref="ixretail:ReasonCode"/>
+				<xs:element minOccurs="0" ref="ixretail:TillControlComment"/>
+				<xs:element maxOccurs="unbounded" ref="ixretail:TillControlDetail"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Type" type="xs:NCName"/>
+	<xs:element name="EmployeeID" type="xs:integer"/>
+	<xs:element name="TillControlComment" type="xs:string"/>
+	<xs:element name="TillControlDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AffectedTenderRepositoryID"/>
+				<xs:element ref="ixretail:AffectedWorkstationID"/>
+				<xs:element ref="ixretail:OldAmount"/>
+				<xs:element ref="ixretail:NewAmount"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AffectedTenderRepositoryID" type="xs:NCName"/>
+	<xs:element name="AffectedWorkstationID" type="xs:integer"/>
+	<xs:element name="OldAmount" type="xs:decimal"/>
+	<xs:element name="NewAmount" type="xs:decimal"/>
+	<xs:element name="InventoryTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:ShippingDefectiveReturn"/>
+					<xs:element ref="ixretail:ReturnToVendor"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:sequence>
+						<xs:element ref="ixretail:CountID"/>
+						<xs:element ref="ixretail:CountType"/>
+						<xs:element ref="ixretail:CountStatus"/>
+					</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="ixretail:DocumentID"/>
+						<xs:element ref="ixretail:DocumentType"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:ReceivingOrder"/>
+					<xs:element ref="dtv:ReceivingReplenishment"/>
+					<xs:element ref="dtv:ReceivingSpecialOrder"/>
+					<xs:element ref="dtv:ReceivingWorkOrder"/>
+					<xs:element ref="dtv:ShippingOrder"/>
+					<xs:element ref="dtv:ShippingSale"/>
+					<xs:element ref="dtv:ShippingWorkOrder"/>
+					<xs:element ref="ixretail:InventoryCount"/>
+					<xs:element ref="ixretail:ReceiveInventory"/>
+					<xs:element ref="ixretail:ReplenishmentOrder"/>
+					<xs:element ref="ixretail:TransferOut"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:ReasonCode"/>
+						<xs:element maxOccurs="unbounded" ref="ixretail:ItemCount"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="Version" type="xs:decimal"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnToVendor">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:DocumentStatus"/>
+				<xs:element ref="ixretail:DocumentID"/>
+				<xs:element ref="ixretail:RetailStoreID"/>
+				<xs:element ref="ixretail:OriginatorID"/>
+				<xs:element ref="ixretail:OriginatorName"/>
+				<xs:element ref="ixretail:DocumentTypeDescription"/>
+				<xs:element ref="ixretail:DocumentType"/>
+				<xs:element ref="ixretail:DocumentSubType"/>
+				<xs:element ref="ixretail:RecordCreationType"/>
+				<xs:element ref="ixretail:CreationTimestamp"/>
+				<xs:element ref="ixretail:CompletionTimestamp"/>
+				<xs:element ref="ixretail:LastActivityTimestamp"/>
+				<xs:element minOccurs="0" ref="ixretail:Note"/>
+				<xs:element ref="ixretail:Shipment"/>
+				<xs:element minOccurs="0" ref="ixretail:Carton"/>
+				<xs:element maxOccurs="unbounded" ref="ixretail:LineItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InventoryCount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:CountID"/>
+				<xs:element ref="ixretail:CountType"/>
+				<xs:element ref="ixretail:CountStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReceiveInventory">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:DocumentStatus"/>
+				<xs:element ref="ixretail:DocumentID"/>
+				<xs:element ref="ixretail:RetailStoreID"/>
+				<xs:element ref="ixretail:OriginatorID"/>
+				<xs:element ref="ixretail:OriginatorName"/>
+				<xs:element ref="ixretail:DocumentTypeDescription"/>
+				<xs:element ref="ixretail:DocumentType"/>
+				<xs:element ref="ixretail:DocumentSubType"/>
+				<xs:element ref="ixretail:RecordCreationType"/>
+				<xs:element minOccurs="0" ref="ixretail:ExpectedDeliveryDate"/>
+				<xs:element minOccurs="0" ref="ixretail:CompletionTimestamp"/>
+				<xs:element ref="ixretail:LastActivityTimestamp"/>
+				<xs:element ref="ixretail:Note"/>
+				<xs:element ref="ixretail:Shipment"/>
+				<xs:element ref="ixretail:Carton"/>
+				<xs:element maxOccurs="unbounded" ref="ixretail:LineItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReplenishmentOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:OrderId"/>
+					<xs:element ref="ixretail:CreationType"/>
+					<xs:element ref="ixretail:OrderStatus"/>
+					<xs:element ref="ixretail:RetailLocationId"/>
+				</xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:CreatedTimestamp"/>
+				<xs:element minOccurs="0" ref="ixretail:HeaderComment"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:OrderLineItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrderId" type="xs:NMTOKEN"/>
+	<xs:element name="CreationType" type="xs:NCName"/>
+	<xs:element name="OrderStatus" type="xs:NCName"/>
+	<xs:element name="RetailLocationId" type="xs:integer"/>
+	<xs:element name="HeaderComment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:CommentType"/>
+				<xs:element minOccurs="0" ref="ixretail:CommentText"/>
+				<xs:element ref="ixretail:CommentID"/>
+				<xs:element ref="ixretail:CreatedTimestamp"/>
+				<xs:element ref="ixretail:CreatedUserId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommentType" type="xs:NCName"/>
+	<xs:element name="CommentText" type="xs:string"/>
+	<xs:element name="CommentID" type="xs:integer"/>
+	<xs:element name="CreatedUserId" type="xs:integer"/>
+	<xs:element name="OrderLineItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:LineItemSequence"/>
+				<xs:element ref="ixretail:ItemId"/>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element ref="ixretail:Status"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:SuggestedOrderQuantity"/>
+					<xs:element ref="ixretail:OrderQuantity"/>
+				</xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:SourceId"/>
+					<xs:element ref="ixretail:SourceType"/>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ItemId" type="xs:integer"/>
+	<xs:element name="Status" type="xs:NCName"/>
+	<xs:element name="SuggestedOrderQuantity" type="xs:integer"/>
+	<xs:element name="OrderQuantity" type="xs:integer"/>
+	<xs:element name="SourceId" type="xs:NCName"/>
+	<xs:element name="SourceType" type="xs:NCName"/>
+	<xs:element name="TransferOut">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:DocumentStatus"/>
+				<xs:element ref="ixretail:DocumentID"/>
+				<xs:element ref="ixretail:RetailStoreID"/>
+				<xs:element ref="ixretail:OriginatorID"/>
+				<xs:element ref="ixretail:OriginatorName"/>
+				<xs:element ref="ixretail:DocumentTypeDescription"/>
+				<xs:element ref="ixretail:DocumentType"/>
+				<xs:element ref="ixretail:DocumentSubType"/>
+				<xs:element ref="ixretail:RecordCreationType"/>
+				<xs:element ref="ixretail:CreationTimestamp"/>
+				<xs:element ref="ixretail:CompletionTimestamp"/>
+				<xs:element ref="ixretail:LastActivityTimestamp"/>
+				<xs:element ref="ixretail:Shipment"/>
+				<xs:element maxOccurs="unbounded" ref="ixretail:LineItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ItemCount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:ItemID"/>
+				<xs:element ref="ixretail:Quantity"/>
+				<xs:element ref="dtv:InventoryBucketId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RetailTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:LineItem"/>
+				<xs:element minOccurs="0" ref="ixretail:Total"/>
+				<xs:element minOccurs="0" ref="ixretail:RoundedTotal"/>
+				<xs:element minOccurs="0" ref="ixretail:Customer"/>
+				<xs:element minOccurs="0" ref="dtv:EmployeeSaleId"/>
+				<xs:element minOccurs="0" ref="ixretail:TransactionLink"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:PostVoidReasonCode"/>
+					<xs:element ref="dtv:TransCancelReasonCode"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="TransactionStatus" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="TypeCode" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Total">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:decimal">
+					<xs:attribute name="TotalType" type="xs:NCName" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RoundedTotal" type="xs:decimal"/>
+	<xs:element name="Customer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:LoyaltyNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:MemberTitle"/>
+				<xs:element minOccurs="0" ref="ixretail:FirstName"/>
+				<xs:element minOccurs="0" ref="ixretail:LastName"/>
+				<xs:element minOccurs="0" ref="ixretail:IntlAddr"/>
+				<xs:element minOccurs="0" ref="ixretail:PointRedeem"/>
+				<xs:element minOccurs="0" ref="ixretail:PointRedeemValue"/>
+				<xs:element minOccurs="0" ref="ixretail:ActiveFlag"/>
+				<xs:element minOccurs="0" ref="ixretail:Address"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Telephone"/>
+				<xs:element minOccurs="0" ref="ixretail:Gender"/>
+				<xs:element minOccurs="0" ref="ixretail:DOB"/>
+				<xs:element minOccurs="0" ref="ixretail:EMail"/>
+				<xs:element minOccurs="0" name="EmailPrivacy" type="xs:string"/>
+				<xs:element minOccurs="0" ref="ixretail:PrivacyFlag"/>
+				<xs:element minOccurs="0" ref="ixretail:EmailDecl"/>
+				<xs:element minOccurs="0" ref="ixretail:DigitalReceiptFlag"/>
+				<xs:element minOccurs="0" ref="ixretail:AccountNumber"/>
+				<xs:element minOccurs="0" name="LPSOffLine" type="xs:string"/>
+				<xs:element minOccurs="0" ref="dtv:CustomerID"/>
+				<xs:choice>
+					<xs:element ref="dtv:AlternateID"/>
+					<xs:element maxOccurs="unbounded" ref="ixretail:AlternateKey"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Telephone">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:FullTelephoneNumber"/>
+				<xs:element ref="dtv:ContactFlag"/>
+			</xs:sequence>
+			<xs:attribute name="PrimaryFlag" type="xs:boolean" use="required"/>
+			<xs:attribute name="TypeCode" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FullTelephoneNumber" type="xs:integer"/>
+	<xs:element name="ActiveFlag" type="xs:boolean"/>
+	<xs:element name="eMail" type="xs:string"/>
+	<xs:element name="AlternateKey">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AlternateID"/>
+			</xs:sequence>
+			<xs:attribute name="TypeCode" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AlternateID" type="xs:NMTOKEN"/>
+	<xs:element name="RetailStoreID" type="xs:integer"/>
+	<xs:element name="WorkstationID" type="xs:integer"/>
+	<xs:element name="SequenceNumber" type="xs:integer"/>
+	<xs:element name="BusinessDayDate" type="xs:NMTOKEN"/>
+	<xs:element name="BeginDateTime" type="xs:NMTOKEN"/>
+	<xs:element name="EndDateTime" type="xs:NMTOKEN"/>
+	<xs:element name="OperatorID" type="xs:integer"/>
+	<xs:element name="CurrencyCode" type="xs:NCName"/>
+	<xs:element name="ReasonCode" type="xs:string"/>
+	<xs:complexType name="dtv.TillID">
+		<xs:sequence>
+			<xs:element ref="dtv:TillID"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="LineItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:SequenceNumber"/>
+				<xs:element minOccurs="0" ref="dtv:TransactionDeal"/>
+				<xs:element minOccurs="0" ref="ixretail:BeginDateTime"/>
+				<xs:element minOccurs="0" ref="ixretail:EndDateTime"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="ixretail:Discount"/>
+					<xs:element ref="ixretail:Layaway"/>
+					<xs:element ref="ixretail:PreviousLayaway"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:Return"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:CustomerOrderForPickup"/>
+					<xs:element ref="ixretail:PreviousCustomerOrder"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:Sale"/>
+				<xs:element minOccurs="0" ref="ixretail:CustomerOrderForDelivery"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:PaymentOnAccount"/>
+					<xs:element ref="ixretail:SaleForDelivery"/>
+					<xs:element ref="ixretail:Tender"/>
+					<xs:sequence>
+						<xs:element ref="dtv:DocumentType"/>
+						<xs:element ref="dtv:DocumentId"/>
+						<xs:element ref="dtv:SeriesId"/>
+						<xs:element ref="dtv:ActivityCode"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:LineNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:ItemID"/>
+				<xs:element minOccurs="0" ref="dtv:QuantityShipped"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:SerialNumber"/>
+					<xs:element ref="ixretail:SerialNumbers"/>
+					<xs:element ref="ixretail:EnteredItemID"/>
+				</xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:TypeCode"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:ActualCount"/>
+					<xs:element ref="ixretail:ExpectedCount"/>
+					<xs:element ref="ixretail:PostedCount"/>
+					<xs:element ref="ixretail:SaleLineItem"/>
+				</xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:RecordCreationType"/>
+				<xs:element minOccurs="0" ref="ixretail:StatusCode"/>
+				<xs:element minOccurs="0" ref="ixretail:ItemAccountModifier"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:QuantityOrdered"/>
+					<xs:element ref="ixretail:QuantityReceived"/>
+					<xs:element ref="ixretail:CartonNumber"/>
+				</xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:LineItemNumber"/>
+					<xs:element ref="ixretail:Description"/>
+				</xs:sequence>
+			</xs:sequence>
+			<xs:attribute name="EntryMethod" type="xs:string"/>
+			<xs:attribute name="VoidFlag" type="xs:boolean"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Discount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Rounding"/>
+				<xs:element ref="dtv:DiscountId"/>
+				<xs:choice>
+					<xs:element ref="ixretail:Amount"/>
+					<xs:element ref="dtv:PercentOff"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Rounding" type="xs:integer"/>
+	<xs:element name="Layaway">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AccountNumber"/>
+				<xs:element ref="ixretail:ItemID"/>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+				<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+				<xs:element ref="ixretail:ExtendedAmount"/>
+				<xs:element ref="ixretail:Quantity"/>
+				<xs:element ref="ixretail:Associate"/>
+				<xs:element ref="dtv:PercentageOfItem"/>
+				<xs:element minOccurs="0" ref="ixretail:RetailPriceModifier"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Tax"/>
+				<xs:element ref="ixretail:GiftReceiptFlag"/>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PreviousLayaway">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AccountNumber"/>
+				<xs:element ref="ixretail:ItemID"/>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+				<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+				<xs:element ref="ixretail:ExtendedAmount"/>
+				<xs:element ref="ixretail:Quantity"/>
+				<xs:element ref="ixretail:Associate"/>
+				<xs:element ref="dtv:PercentageOfItem"/>
+				<xs:element minOccurs="0" ref="ixretail:RetailPriceModifier"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Tax"/>
+				<xs:element ref="ixretail:GiftReceiptFlag"/>
+			</xs:sequence>
+			<xs:attribute name="Action" type="xs:NCName" use="required"/>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CustomerOrderForPickup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="dtv:OrderType"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="ixretail:AccountNumber"/>
+					<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+					<xs:element ref="ixretail:Associate"/>
+					<xs:element ref="ixretail:Description"/>
+					<xs:element ref="ixretail:ExtendedAmount"/>
+					<xs:element ref="ixretail:From"/>
+					<xs:element ref="ixretail:GiftReceiptFlag"/>
+					<xs:element ref="ixretail:ItemID"/>
+					<xs:element ref="ixretail:MerchandiseHierarchy"/>
+					<xs:element ref="ixretail:Pickup"/>
+					<xs:element ref="ixretail:Quantity"/>
+					<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+					<xs:element ref="ixretail:RetailPriceModifier"/>
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="dtv:PercentageOfItem"/>
+					<xs:element ref="dtv:VoidReason"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="OrderStatus" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PreviousCustomerOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="dtv:OrderType"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="ixretail:AccountNumber"/>
+					<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+					<xs:element ref="ixretail:Associate"/>
+					<xs:element ref="ixretail:Description"/>
+					<xs:element ref="ixretail:ExtendedAmount"/>
+					<xs:element ref="ixretail:From"/>
+					<xs:element ref="ixretail:GiftReceiptFlag"/>
+					<xs:element ref="ixretail:ItemID"/>
+					<xs:element ref="ixretail:Kit"/>
+					<xs:element ref="ixretail:MerchandiseHierarchy"/>
+					<xs:element ref="ixretail:Pickup"/>
+					<xs:element ref="ixretail:Quantity"/>
+					<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+					<xs:element ref="ixretail:RetailPriceModifier"/>
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="dtv:PercentageOfItem"/>
+					<xs:element minOccurs="0" ref="ixretail:CancelReasonCode"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="Action" type="xs:NCName" use="required"/>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CancelReasonCode" type="xs:string"/>
+	<xs:element name="CustomerOrderForDelivery">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="dtv:OrderType"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="ixretail:AccountNumber"/>
+					<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+					<xs:element ref="ixretail:Associate"/>
+					<xs:element ref="ixretail:Delivery"/>
+					<xs:element ref="ixretail:Description"/>
+					<xs:element ref="ixretail:ExtendedAmount"/>
+					<xs:element ref="ixretail:From"/>
+					<xs:element ref="ixretail:GiftReceiptFlag"/>
+					<xs:element ref="ixretail:ItemID"/>
+					<xs:element ref="ixretail:Quantity"/>
+					<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+					<xs:element ref="ixretail:RetailPriceModifier"/>
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="dtv:PercentageOfItem"/>
+					<xs:element ref="dtv:VoidReason"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+			<xs:attribute name="OrderStatus" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentOnAccount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AccountNumber"/>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:element minOccurs="0" ref="dtv:VoidReason"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SaleForDelivery">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AccountNumber"/>
+				<xs:element ref="ixretail:ItemID"/>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+				<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+				<xs:element ref="ixretail:ExtendedAmount"/>
+				<xs:element ref="ixretail:Quantity"/>
+				<xs:element ref="ixretail:SellingLocation"/>
+				<xs:element ref="ixretail:Associate"/>
+				<xs:element ref="dtv:PercentageOfItem"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:RetailPriceModifier"/>
+				<xs:element maxOccurs="unbounded" ref="ixretail:Tax"/>
+				<xs:element ref="ixretail:GiftReceiptFlag"/>
+				<xs:element minOccurs="0" ref="dtv:VoidReason"/>
+				<xs:element ref="ixretail:Delivery"/>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+			<xs:attribute name="OrderStatus" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SellingLocation">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:integer">
+					<xs:attribute name="Level" type="xs:NCName" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tender">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:TenderID"/>
+				<xs:element minOccurs="0" ref="ixretail:ForeignCurrency"/>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:AccountCredit"/>
+					<xs:element ref="ixretail:TravelersCheck"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:StoreAccount"/>
+						<xs:element ref="dtv:UserName"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:Authorization"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:PayDeduct"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:CustomerVerification"/>
+						<xs:element ref="ixretail:Check"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:CreditDebit"/>
+					<xs:element ref="ixretail:Voucher"/>
+				</xs:choice>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:LineItemProperty"/>
+				<xs:element minOccurs="0" ref="ixretail:Coupon"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:SerialNumber"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:Address"/>
+						<xs:element ref="ixretail:SendCheck"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="TenderType" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="TypeCode" type="xs:NCName" use="required"/>
+			<xs:attribute ref="dtv:ChangeFlag" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TenderID" type="xs:NCName"/>
+	<xs:element name="ForeignCurrency">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:DateTime"/>
+				<xs:element ref="ixretail:CurrencyCode"/>
+				<xs:element ref="ixretail:OriginalFaceAmount"/>
+				<xs:element ref="ixretail:ExchangeRate"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DateTime" type="xs:NMTOKEN"/>
+	<xs:element name="OriginalFaceAmount" type="xs:decimal"/>
+	<xs:element name="ExchangeRate" type="xs:decimal"/>
+	<xs:element name="TravelersCheck">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:CheckCount"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CheckCount" type="xs:integer"/>
+	<xs:element name="StoreAccount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AccountID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccountID" type="xs:NCName"/>
+	<xs:element name="Authorization">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:RequestedAmount"/>
+				<xs:element ref="ixretail:AuthorizationCode"/>
+				<xs:element minOccurs="0" ref="ixretail:ReferenceNumber"/>
+				<xs:element ref="ixretail:AuthorizationDateTime"/>
+				<xs:element minOccurs="0" ref="ixretail:TraceNumber"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dtv:Tax"/>
+					<xs:element ref="dtv:Discount"/>
+					<xs:element ref="dtv:Freight"/>
+					<xs:element ref="dtv:Duty"/>
+				</xs:sequence>
+				<xs:element ref="dtv:AdjudicationCode"/>
+				<xs:element minOccurs="0" ref="dtv:ResponseCode"/>
+				<xs:element minOccurs="0" ref="dtv:ActionCode"/>
+				<xs:element minOccurs="0" ref="dtv:ApprovalFlag"/>
+				<xs:element minOccurs="0" ref="dtv:ResponseSequenceNumber"/>
+				<xs:element minOccurs="0" ref="dtv:ErrorText"/>
+				<xs:element minOccurs="0" ref="dtv:ResponseText"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestedAmount" type="xs:decimal"/>
+	<xs:element name="AuthorizationCode" type="xs:string"/>
+	<xs:element name="ReferenceNumber" type="xs:NCName"/>
+	<xs:element name="AuthorizationDateTime" type="xs:NMTOKEN"/>
+	<xs:element name="TraceNumber" type="xs:string"/>
+	<xs:element name="CustomerVerification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:PersonalID"/>
+				<xs:element ref="ixretail:Birthdate"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonalID">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:IDNumber"/>
+				<xs:element ref="ixretail:Issuer"/>
+				<xs:element ref="ixretail:Province"/>
+			</xs:sequence>
+			<xs:attribute name="IDType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IDNumber" type="xs:NMTOKEN"/>
+	<xs:element name="Issuer" type="xs:NCName"/>
+	<xs:element name="Province" type="xs:NCName"/>
+	<xs:element name="Birthdate" type="xs:NMTOKEN"/>
+	<xs:element name="Check">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:BankID"/>
+				<xs:element ref="ixretail:CheckNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:AccountNumber"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BankID" type="xs:integer"/>
+	<xs:element name="CheckNumber" type="xs:integer"/>
+	<xs:element name="CreditDebit">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:PrimaryAccountNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:ReconciliationCode"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dtv:ExpirationDateEncrypted"/>
+					<xs:element ref="dtv:MaskedCardNumber"/>
+					<xs:element minOccurs="0" ref="dtv:AuthorizationToken"/>
+					<xs:element ref="dtv:HashedCardNumber"/>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrimaryAccountNumber" type="xs:string"/>
+	<xs:element name="ReconciliationCode" type="xs:string"/>
+	<xs:element name="Voucher">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element minOccurs="0" ref="dtv:MallCertificate"/>
+				<xs:element minOccurs="0" ref="ixretail:FaceValueAmount"/>
+				<xs:element minOccurs="0" ref="ixretail:SerialNumber"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:ExpirationDate"/>
+					<xs:element ref="ixretail:CardNumber"/>
+				</xs:choice>
+				<xs:element ref="ixretail:UnspentAmount"/>
+			</xs:sequence>
+			<xs:attribute name="TypeCode" type="xs:NMTOKEN" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FaceValueAmount" type="xs:decimal"/>
+	<xs:element name="CardNumber" type="xs:integer"/>
+	<xs:element name="UnspentAmount" type="xs:decimal"/>
+	<xs:element name="SendCheck">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:ReasonCode"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LineNumber" type="xs:integer"/>
+	<xs:element name="SerialNumbers" type="xs:string"/>
+	<xs:element name="EnteredItemID" type="xs:integer"/>
+	<xs:element name="TypeCode" type="xs:NCName"/>
+	<xs:element name="ActualCount" type="xs:decimal"/>
+	<xs:element name="ExpectedCount" type="xs:decimal"/>
+	<xs:element name="PostedCount" type="xs:decimal"/>
+	<xs:element name="SaleLineItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:RetailLocationID"/>
+				<xs:element ref="ixretail:WorkstationID"/>
+				<xs:element minOccurs="0" ref="ixretail:BusinessDate"/>
+				<xs:element ref="ixretail:TransactionSequence"/>
+				<xs:element ref="ixretail:LineItemSequence"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RetailLocationID" type="xs:integer"/>
+	<xs:element name="BusinessDate" type="xs:NMTOKEN"/>
+	<xs:element name="TransactionSequence" type="xs:integer"/>
+	<xs:element name="ItemAccountModifier">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:CustomerAccountCode"/>
+				<xs:element ref="ixretail:CustomerAccountID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CustomerAccountCode" type="xs:NCName"/>
+	<xs:element name="CustomerAccountID" type="xs:NCName"/>
+	<xs:element name="QuantityOrdered" type="xs:integer"/>
+	<xs:element name="QuantityReceived" type="xs:integer"/>
+	<xs:element name="CartonNumber" type="xs:string"/>
+	<xs:element name="LineItemNumber" type="xs:integer"/>
+	<xs:element name="DocumentStatus" type="xs:NCName"/>
+	<xs:element name="DocumentID" type="xs:NMTOKEN"/>
+	<xs:element name="OriginatorID" type="xs:NMTOKEN"/>
+	<xs:element name="OriginatorName" type="xs:string"/>
+	<xs:element name="DocumentTypeDescription" type="xs:NCName"/>
+	<xs:element name="DocumentType" type="xs:NCName"/>
+	<xs:element name="DocumentSubType" type="xs:NCName"/>
+	<xs:element name="RecordCreationType" type="xs:NCName"/>
+	<xs:element name="CreationTimestamp" type="xs:string"/>
+	<xs:element name="CompletionTimestamp" type="xs:NMTOKEN"/>
+	<xs:element name="LastActivityTimestamp" type="xs:NMTOKEN"/>
+	<xs:element name="Note">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:NoteID"/>
+				<xs:element ref="ixretail:CreatorPartyID"/>
+				<xs:element ref="ixretail:CreationTimestamp"/>
+				<xs:element minOccurs="0" ref="ixretail:NoteText"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NoteID" type="xs:integer"/>
+	<xs:element name="CreatorPartyID" type="xs:integer"/>
+	<xs:element name="NoteText" type="xs:string"/>
+	<xs:element name="Shipment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:ShipmentSequence"/>
+				<xs:element minOccurs="0" ref="ixretail:ExpectedDeliveryDate"/>
+				<xs:element minOccurs="0" ref="ixretail:ActualDeliveryDate"/>
+				<xs:element minOccurs="0" ref="ixretail:ExpectedShipDate"/>
+				<xs:element minOccurs="0" ref="ixretail:ActualShipDate"/>
+				<xs:element minOccurs="0" ref="ixretail:DestinationPartyID"/>
+				<xs:element minOccurs="0" ref="ixretail:DestinationRetailLocationID"/>
+				<xs:element minOccurs="0" ref="ixretail:DestinationName"/>
+				<xs:element minOccurs="0" ref="ixretail:ShippingCarrier"/>
+				<xs:element minOccurs="0" ref="ixretail:ShippingMethod"/>
+				<xs:element minOccurs="0" ref="ixretail:TrackingNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:StatusCode"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Address"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShipmentSequence" type="xs:integer"/>
+	<xs:element name="ActualDeliveryDate" type="xs:NMTOKEN"/>
+	<xs:element name="ExpectedShipDate" type="xs:NMTOKEN"/>
+	<xs:element name="ActualShipDate" type="xs:NMTOKEN"/>
+	<xs:element name="DestinationPartyID" type="xs:integer"/>
+	<xs:element name="DestinationRetailLocationID" type="xs:integer"/>
+	<xs:element name="DestinationName" type="xs:string"/>
+	<xs:element name="ShippingCarrier" type="xs:NCName"/>
+	<xs:element name="ShippingMethod" type="xs:NCName"/>
+	<xs:element name="TrackingNumber" type="xs:NMTOKEN"/>
+	<xs:element name="Carton">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:CartonID"/>
+				<xs:element minOccurs="0" ref="ixretail:StatusCode"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:LineItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CartonID" type="xs:string"/>
+	<xs:element name="CountID" type="xs:NMTOKEN"/>
+	<xs:element name="CountType" type="xs:NCName"/>
+	<xs:element name="CountStatus" type="xs:NCName"/>
+	<xs:element name="Description" type="xs:string"/>
+	<xs:element name="ExpectedDeliveryDate" type="xs:NMTOKEN"/>
+	<xs:element name="CreatedTimestamp" type="xs:NMTOKEN"/>
+	<xs:element name="LineItemSequence" type="xs:integer"/>
+	<xs:element name="ItemID" type="xs:NMTOKEN"/>
+	<xs:element name="Quantity" type="xs:integer"/>
+	<xs:element name="AssociateID" type="xs:integer"/>
+	<xs:element name="Amount">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:decimal">
+					<xs:attribute name="Action" type="xs:NCName"/>
+					<xs:attribute name="Currency" type="xs:NCName"/>
+					<xs:attribute name="ForeignAmount" type="xs:decimal"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Reason" type="xs:string"/>
+	<xs:element name="LoyaltyNumber" type="xs:string"/>
+	<xs:element name="MemberTitle" type="xs:string"/>
+	<xs:element name="Name" type="xs:string"/>
+	<xs:element name="FirstName" type="xs:string"/>
+	<xs:element name="LastName" type="xs:string"/>
+	<xs:element name="IntlAddr" type="xs:string"/>
+	<xs:element name="PointRedeem" type="xs:string"/>
+	<xs:element name="PointRedeemValue" type="xs:string"/>
+	<xs:element name="Gender" type="xs:string"/>
+	<xs:element name="DOB" type="xs:string"/>
+	<xs:element name="EMail" type="xs:string"/>
+	<xs:element name="EMailPrivacy" type="xs:string"/>
+	<xs:element name="PrivacyFlag" type="xs:string"/>
+	<xs:element name="EmailDecl" type="xs:string"/>
+	<xs:element name="DigitalReceiptFlag" type="xs:string"/>
+	<xs:element name="Address">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:AddressLine1"/>
+				<xs:element minOccurs="0" ref="ixretail:AddressLine2"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:AddressLine3"/>
+					<xs:element ref="ixretail:AddressLine4"/>
+				</xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:ApartmentNumber"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:Name"/>
+						<xs:element ref="ixretail:AddressLine"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:element ref="ixretail:City"/>
+				<xs:choice>
+					<xs:element ref="ixretail:State"/>
+					<xs:element ref="ixretail:Territory"/>
+				</xs:choice>
+				<xs:element ref="ixretail:PostalCode"/>
+				<xs:element minOccurs="0" ref="ixretail:Country"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:Contact"/>
+					<xs:element ref="ixretail:Apartment"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="PrimaryFlag" type="xs:boolean"/>
+			<xs:attribute name="TypeCode" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine1">
+		<xs:complexType mixed="true">
+			<xs:attribute name="Type" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine2">
+		<xs:complexType mixed="true">
+			<xs:attribute name="Type" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddressLine3" type="xs:string"/>
+	<xs:element name="AddressLine4" type="xs:string"/>
+	<xs:element name="ApartmentNumber" type="xs:NMTOKEN"/>
+	<xs:element name="AddressLine" type="xs:string"/>
+	<xs:element name="City" type="xs:string"/>
+	<xs:element name="State" type="xs:NCName"/>
+	<xs:element name="Territory">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:NCName">
+					<xs:attribute name="TypeCode" type="xs:NCName"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PostalCode" type="xs:NMTOKEN"/>
+	<xs:element name="Country" type="xs:NCName"/>
+	<xs:element name="Apartment" type="xs:NCName"/>
+	<xs:element name="AccountNumber" type="xs:anyURI"/>
+	<xs:element name="TransactionLink">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:RetailStoreID"/>
+				<xs:element ref="ixretail:WorkstationID"/>
+				<xs:element ref="ixretail:SequenceNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:LineItemSequenceNumber"/>
+				<xs:element ref="ixretail:BusinessDayDate"/>
+			</xs:sequence>
+			<xs:attribute name="ReasonCode" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LineItemSequenceNumber" type="xs:integer"/>
+	<xs:element name="PromotionID" type="xs:string"/>
+	<xs:element name="RegularSalesUnitPrice" type="xs:decimal"/>
+	<xs:element name="ActualSalesUnitPrice" type="xs:decimal"/>
+	<xs:element name="ExtendedAmount" type="xs:decimal"/>
+	<xs:element name="Associate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:AssociateID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RetailPriceModifier">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:SequenceNumber"/>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:PromotionID"/>
+					<xs:sequence>
+						<xs:element ref="ixretail:PreviousPrice"/>
+						<xs:element ref="ixretail:NewPrice"/>
+					</xs:sequence>
+				</xs:choice>
+				<xs:element ref="ixretail:ReasonCode"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dtv:SerialNumber"/>
+					<xs:element ref="ixretail:Coupon"/>
+				</xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:element ref="dtv:DiscountReasonCode"/>
+					<xs:element ref="dtv:DiscountReasonCodeComment"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="MethodCode" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="VoidFlag" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PreviousPrice" type="xs:decimal"/>
+	<xs:element name="NewPrice" type="xs:decimal"/>
+	<xs:element name="Tax">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:TaxAuthority"/>
+				<xs:element ref="ixretail:TaxableAmount"/>
+				<xs:element minOccurs="0" ref="ixretail:TaxName"/>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:element ref="ixretail:Percent"/>
+				<xs:element minOccurs="0" ref="ixretail:TaxExemption"/>
+				<xs:element minOccurs="0" ref="ixretail:TaxOverride"/>
+				<xs:element ref="dtv:TaxLocationId"/>
+				<xs:element ref="dtv:TaxGroupId"/>
+			</xs:sequence>
+			<xs:attribute name="TaxType" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute ref="dtv:VoidFlag" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TaxAuthority" type="xs:NCName"/>
+	<xs:element name="TaxableAmount" type="xs:string"/>
+	<xs:element name="TaxName" type="xs:decimal"/>
+	<xs:element name="Percent" type="xs:double"/>
+	<xs:element name="TaxExemption">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:CustomerExemptionID"/>
+				<xs:element ref="ixretail:ExemptTaxableAmount"/>
+				<xs:element ref="ixretail:ExemptTaxAmount"/>
+				<xs:element ref="ixretail:ReasonCode"/>
+				<xs:element ref="ixretail:CertificateNumber"/>
+				<xs:element ref="ixretail:CertificateHolderName"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="dtv:DiplomaticTitle"/>
+					<xs:element ref="dtv:Address1"/>
+					<xs:element ref="dtv:Address2"/>
+					<xs:element ref="dtv:Address3"/>
+					<xs:element ref="dtv:Address4"/>
+					<xs:element ref="dtv:City"/>
+					<xs:element ref="dtv:Territory"/>
+					<xs:element ref="dtv:PostalCode"/>
+					<xs:element ref="dtv:Country"/>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CustomerExemptionID" type="xs:NMTOKEN"/>
+	<xs:element name="ExemptTaxableAmount" type="xs:decimal"/>
+	<xs:element name="ExemptTaxAmount" type="xs:decimal"/>
+	<xs:element name="CertificateNumber" type="xs:NMTOKEN"/>
+	<xs:element name="CertificateHolderName" type="xs:NMTOKEN"/>
+	<xs:element name="TaxOverride">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:OriginalTaxPercent"/>
+				<xs:element ref="ixretail:OriginalTaxAmount"/>
+				<xs:element ref="ixretail:NewTaxPercent"/>
+				<xs:element ref="ixretail:NewTaxAmount"/>
+				<xs:element minOccurs="0" ref="ixretail:ReasonCode"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OriginalTaxPercent" type="xs:decimal"/>
+	<xs:element name="OriginalTaxAmount" type="xs:decimal"/>
+	<xs:element name="NewTaxPercent" type="xs:decimal"/>
+	<xs:element name="NewTaxAmount" type="xs:decimal"/>
+	<xs:element name="GiftReceiptFlag" type="xs:boolean"/>
+	<xs:element name="Return">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded" minOccurs="0">
+					<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+					<xs:element ref="ixretail:Associate"/>
+					<xs:element ref="ixretail:Description"/>
+					<xs:element ref="ixretail:ExtendedAmount"/>
+					<xs:element ref="ixretail:ItemID"/>
+					<xs:element ref="ixretail:Kit"/>
+					<xs:element ref="ixretail:Quantity"/>
+					<xs:element ref="dtv:VendorID"/>
+					<xs:element ref="dtv:DepartmentID"/>
+					<xs:element ref="dtv:SubDepartmentID"/>
+					<xs:element ref="dtv:ClassID"/>
+					<xs:element ref="dtv:SubClassID"/>
+					<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+					<xs:element ref="ixretail:RetailPriceModifier"/>
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="dtv:PercentageOfItem"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:TransactionLink"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:Disposal"/>
+					<xs:element ref="ixretail:Reason"/>
+				</xs:sequence>
+				<xs:element minOccurs="0" ref="dtv:ReturnType"/>
+				<xs:sequence minOccurs="0">
+					<xs:element minOccurs="0" ref="dtv:ReasonComment"/>
+					<xs:element ref="dtv:Disposition"/>
+				</xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:element ref="ixretail:SerialNumber"/>
+					<xs:element ref="dtv:VoidReason"/>
+				</xs:choice>
+				<xs:choice>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:LineItemProperty"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="dtv:ScannedItemID"/>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NMTOKEN" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Disposal">
+		<xs:complexType>
+			<xs:attribute name="Method" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MerchandiseHierarchy">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:NMTOKEN">
+					<xs:attribute name="Level" type="xs:NCName" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="From" type="xs:integer"/>
+	<xs:element name="Kit">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Member"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Member">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="ixretail:Return"/>
+				<xs:element ref="ixretail:Sale"/>
+				<xs:element ref="ixretail:SaleForPickup"/>
+			</xs:choice>
+			<xs:attribute name="Action" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SaleForPickup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:ItemID"/>
+				<xs:element ref="ixretail:MerchandiseHierarchy"/>
+				<xs:element ref="ixretail:Description"/>
+				<xs:element ref="ixretail:UnitCostPrice"/>
+				<xs:element ref="ixretail:ExtendedAmount"/>
+				<xs:element ref="ixretail:Quantity"/>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Pickup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:AccountNumber"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Sale">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded" minOccurs="0">
+					<xs:element ref="ixretail:ActualSalesUnitPrice"/>
+					<xs:element ref="ixretail:Associate"/>
+					<xs:element ref="ixretail:Description"/>
+					<xs:element ref="ixretail:ExtendedAmount"/>
+					<xs:element ref="ixretail:ItemID"/>
+					<xs:element ref="ixretail:Kit"/>
+					<xs:element ref="ixretail:Quantity"/>
+					<xs:element ref="dtv:VendorID"/>
+					<xs:element ref="dtv:DepartmentID"/>
+					<xs:element ref="dtv:SubDepartmentID"/>
+					<xs:element ref="dtv:ClassID"/>
+					<xs:element ref="dtv:SubClassID"/>
+					<xs:element ref="ixretail:RegularSalesUnitPrice"/>
+					<xs:element ref="ixretail:RetailPriceModifier"/>
+					<xs:element ref="ixretail:Tax"/>
+					<xs:element ref="ixretail:UnitCostPrice"/>
+					<xs:element ref="dtv:PercentageOfItem"/>
+					<xs:element ref="ixretail:UnitListPrice"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="ixretail:SerialNumber"/>
+				<xs:element minOccurs="0" ref="ixretail:GiftReceiptFlag"/>
+				<xs:element minOccurs="0" ref="dtv:VoidReason"/>
+				<xs:choice>
+					<xs:element ref="dtv:AuthorizationCode"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:LineItemProperty"/>
+				</xs:choice>
+				<xs:element minOccurs="0" ref="dtv:ScannedItemID"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="dtv:LineItemAssociation"/>
+			</xs:sequence>
+			<xs:attribute name="ItemType" type="xs:NMTOKEN" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UnitListPrice" type="xs:decimal"/>
+	<xs:element name="Delivery">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:Name"/>
+					<xs:element ref="ixretail:Address"/>
+					<xs:element ref="ixretail:TelephoneNumber"/>
+				</xs:sequence>
+				<xs:element minOccurs="0" ref="ixretail:Method"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TelephoneNumber" type="xs:integer"/>
+	<xs:element name="Method" type="xs:NCName"/>
+	<xs:element name="SerialNumber" type="xs:NMTOKEN"/>
+	<xs:element name="ExpirationDate" type="xs:NMTOKEN"/>
+	<xs:element name="Coupon">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="ixretail:PrimaryLabel"/>
+					<xs:element ref="ixretail:ExpirationDate"/>
+				</xs:sequence>
+				<xs:element ref="ixretail:ScanCode"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrimaryLabel" type="xs:integer"/>
+	<xs:element name="ScanCode" type="xs:integer"/>
+	<xs:element name="StatusCode" type="xs:NCName"/>
+	<xs:element name="DifferenceAmount" type="xs:decimal"/>
+	<xs:element name="TenderTotal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ixretail:Amount"/>
+				<xs:element minOccurs="0" ref="ixretail:DifferenceAmount"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UnitCostPrice" type="xs:decimal"/>
+	<xs:element name="STORE_TOTAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:TENDER_TOTAL"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:DISCOUNT_TOTAL"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:TAX_TOTAL"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:RETAIL_TOTAL"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TENDER_TOTAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:OrganizationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:RetailStoreID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:WorkstationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:BusinessDayDate"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:TransactionType"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Tender_StoreTotal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tender_StoreTotal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Quantity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Amount"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:DifferenceAmount"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DISCOUNT_TOTAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:OrganizationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:RetailStoreID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:WorkstationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:BusinessDayDate"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:TransactionType"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Discount_StoreTotal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Discount_StoreTotal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Quantity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Amount"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TAX_TOTAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:OrganizationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:RetailStoreID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:WorkstationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:BusinessDayDate"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:TransactionType"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Tax_StoreTotal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tax_StoreTotal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Quantity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Amount"/>
+			</xs:sequence>
+			<xs:attribute name="authority" type="xs:integer" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RETAIL_TOTAL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:OrganizationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:RetailStoreID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:WorkstationID"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:BusinessDayDate"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="dtv:TransactionType"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:TransactionQuantity"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ixretail:Retail_StoreTotal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransactionQuantity" type="xs:integer"/>
+	<xs:element name="Retail_StoreTotal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Quantity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ixretail:Amount"/>
+			</xs:sequence>
+			<xs:attribute name="saleType" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

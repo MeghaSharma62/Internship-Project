@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <form onsubmit="return validate()">
+            <h1>Welcome to Registration Form </h1>
+            <label>Username<input type="text" id="Username" name="Username"></label><br><br>
+            <label>Password:<input type="password" id="password" name="password"></label><br><br>
+            <label>Confirm_Password<input type="password" id="confirm password" name="confirm password"></label><br><br>
+            <label>Age:<input type="number" id="age" name="age"></label><br><br>
+            <label>DOB<input type="date" id="dob" name="dob"></label><br><br>
+            <label>Stream<input type="text" id="stream" name="stream"></label><br><br>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+    <script>
+        function validate()
+            {
+                var Password=document.getElementById("Password");
+                var Confirm_Password=document.getElementById("Confirm_Password")
+                var Age=document.getElementById("Age")
+                if (Password==Confirm_Password){
+                    alert("Password Valid");
+                    return true;
+                }
+                else{
+                   alert ("Password doesn't match");
+                    return false;
+                    
+                }
+                if (age>=18 && age<=24){
+                    alert ("Regestration sucessfully");
+                
+                }
+                else{
+                    alert("Age should be 18 to 24");
+                }
+            }
+        </script>
+    </body>
+</html>    
